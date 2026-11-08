@@ -31,7 +31,7 @@ function loopbackUrl(value, fallback) {
 export function loadConfig(env = process.env) {
   const home = env.HOME || '';
   return {
-    stateDir: env.GPU_STATE_DIR || join(home, '.config', 'penny-gpu'),
+    stateDir: env.GPU_STATE_DIR || join(home, '.config', 'hermes-gpu'),
     localPort: port(env.GPU_MANAGER_PORT, DEFAULTS.managerPort),
     routerPort: port(env.GPU_ROUTER_PORT, DEFAULTS.routerPort),
     gpuBackend: loopbackUrl(env.GPU_BACKEND_URL, DEFAULTS.gpuBackend),

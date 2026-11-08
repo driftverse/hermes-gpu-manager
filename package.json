@@ -1,10 +1,10 @@
 {
-  "name": "penny-gpu-manager",
+  "name": "hermes-gpu-manager",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "repository": "github:driftverse/penny-gpu-manager",
-  "description": "GPU priority manager and Ollama router for Penny (zero dependencies).",
+  "repository": "github:driftverse/hermes-gpu-manager",
+  "description": "GPU priority manager and Ollama router for Hermes Agent (zero dependencies).",
   "type": "module",
   "engines": { "node": ">=22" },
   "scripts": {

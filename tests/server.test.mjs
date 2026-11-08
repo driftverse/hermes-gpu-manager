@@ -34,7 +34,7 @@ function stubManager(over = {}) {
 }
 
 async function boot({ manager = stubManager(), config = {}, authDeps } = {}) {
-  const dir = await mkdtemp(join(tmpdir(), 'penny-gui-'));
+  const dir = await mkdtemp(join(tmpdir(), 'hermes-gui-'));
   await writeFile(join(dir, 'index.html'), '<!doctype html><title>t</title><script src="/app.js"></script>');
   await writeFile(join(dir, 'app.js'), 'export {};');
   await writeFile(join(dir, 'lib.js'), 'export {};');

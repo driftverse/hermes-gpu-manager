@@ -1,7 +1,7 @@
-# The GPU Ollama instance. Same binary, models and settings as the old penny-ollama.service, moved to port 11436.
+# The GPU Ollama instance. Same binary, models and settings as the old hermes-ollama.service, moved to port 11436.
 # The manager decides which models live here; nothing should talk to this port directly except the manager and router.
 [Unit]
-Description=Penny Ollama (GPU instance, loopback only)
+Description=Hermes Ollama (GPU instance, loopback only)
 After=network.target
 
 [Service]

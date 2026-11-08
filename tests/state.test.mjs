@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { createStateStore, defaultState, validateState, validateWorkloadDef } from '../src/state.mjs';
 
 async function tmp() {
-  const dir = await mkdtemp(join(tmpdir(), 'penny-state-'));
+  const dir = await mkdtemp(join(tmpdir(), 'hermes-state-'));
   return { dir, done: () => rm(dir, { recursive: true, force: true }) };
 }
 

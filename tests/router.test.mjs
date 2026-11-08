@@ -341,14 +341,14 @@ test('/api/ps merges both instances and tags each entry with its backend', async
   const { port } = await setup({ gpu: ps('on-gpu'), cpu: ps('on-cpu') });
   const r = await request(port, { path: '/api/ps' });
   assert.equal(r.status, 200);
-  assert.deepEqual(r.json.models.map((m) => [m.name, m.penny_backend]), [['on-gpu', 'gpu'], ['on-cpu', 'cpu']]);
+  assert.deepEqual(r.json.models.map((m) => [m.name, m.hermes_backend]), [['on-gpu', 'gpu'], ['on-cpu', 'cpu']]);
 });
 
 test('/api/ps still answers when one instance is down', async () => {
   const { port } = await setup({ gpuUrl: await deadUrl(), gpu: null, cpu: (req, res) => { res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify({ models: [{ name: 'x' }] })); } });
   const r = await request(port, { path: '/api/ps' });
   assert.equal(r.status, 200);
-  assert.deepEqual(r.json.models.map((m) => m.penny_backend), ['cpu']);
+  assert.deepEqual(r.json.models.map((m) => m.hermes_backend), ['cpu']);
 });
 
 test('event log keeps only the last 50 events', async () => {

@@ -10,7 +10,7 @@ import { goodConfig } from '../tests/helpers/jwt-fixture.mjs';
 
 const world = await createWorld().start();
 world.catalog.set('qwen3:1.7b', { name: 'qwen3:1.7b', size: 1_400_000_000, layers: 28, numCtx: 8192, base: null });
-const stateDir = await mkdtemp(join(tmpdir(), 'penny-demo-'));
+const stateDir = await mkdtemp(join(tmpdir(), 'hermes-demo-'));
 const config = { ...goodConfig(), stateDir, routerPort: 0, localPort: 3099, gpuBackend: world.servers.gpu.url, cpuBackend: world.servers.cpu.url, reconcileMs: 4000 };
 const app = await startApp({ config, runner: world.runner, publicDir: join(import.meta.dirname, '..', 'public') });
 console.log(`demo on http://127.0.0.1:${app.managerPort}/  (router ${app.routerPort})  state ${stateDir}`);

@@ -3,7 +3,7 @@
 # BOTH variables are needed: CUDA_VISIBLE_DEVICES=-1 alone still lets Ollama find the card through Vulkan
 # (it put 270 MiB of the model on the GPU in testing); OLLAMA_VULKAN=0 closes that.
 [Unit]
-Description=Penny Ollama (CPU-only instance, loopback only)
+Description=Hermes Ollama (CPU-only instance, loopback only)
 After=network.target
 
 [Service]

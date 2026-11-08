@@ -80,7 +80,7 @@ function journaled(adapter, journal) {
 
 export async function harness({ world: worldOpts, mutate, start = false } = {}) {
   const world = await createWorld(worldOpts).start();
-  const dir = await mkdtemp(join(tmpdir(), 'penny-mgr-'));
+  const dir = await mkdtemp(join(tmpdir(), 'hermes-mgr-'));
   const clock = createFakeClock();
   const journal = [];
   const router = createFakeRouter(journal);

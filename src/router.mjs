@@ -15,7 +15,7 @@
 // never be cut. In-flight requests are only ever aborted by the client going away.
 //
 // Design choices for non-inference endpoints:
-//   GET /api/ps   -> merged: both instances queried, each model entry tagged with `penny_backend`
+//   GET /api/ps   -> merged: both instances queried, each model entry tagged with `hermes_backend`
 //   GET /api/tags -> proxied to the CPU instance (same model store), GPU only if the CPU instance fails
 //   everything else without a model -> CPU first, GPU on failover
 
@@ -283,7 +283,7 @@ export function createRouter({ backends, maxBodyBytes = MAX_BODY_BYTES, now = Da
     settled.forEach((r, i) => {
       if (r.status !== 'fulfilled') return;
       any = true;
-      for (const m of r.value?.models || []) models.push({ ...m, penny_backend: BACKENDS[i] });
+      for (const m of r.value?.models || []) models.push({ ...m, hermes_backend: BACKENDS[i] });
     });
     if (!any) {
       res.writeHead(502, { 'content-type': 'application/json' });

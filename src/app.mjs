@@ -14,7 +14,7 @@ import { createSafeRunner } from './system.mjs';
 import { createStateStore } from './state.mjs';
 import { createAppServer } from './server.mjs';
 
-export const OLLAMA_UNITS = Object.freeze(['penny-ollama-gpu.service', 'penny-ollama-cpu.service']);
+export const OLLAMA_UNITS = Object.freeze(['hermes-ollama-gpu.service', 'hermes-ollama-cpu.service']);
 
 export async function startApp({ config, runner, publicDir, authDeps, logger = console }) {
   const cfg = { ...config };

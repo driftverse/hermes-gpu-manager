@@ -1,6 +1,6 @@
-# Penny GPU Manager
+# Hermes GPU Manager
 
-A single-GPU priority manager and streaming Ollama router built for a Linux home server with a 4 GB NVIDIA Quadro P1000. This is an experimental open-source prototype, not a turnkey installer or an audited release.
+A single-GPU priority manager and streaming Ollama router for sharing a small GPU between local models (such as those used by [Hermes Agent](https://github.com/NousResearch/hermes-agent)) and occasional render jobs. Built for a Linux home server with a 4 GB NVIDIA Quadro P1000. This is an independent community project, not affiliated with or endorsed by Nous Research, and an experimental prototype rather than a turnkey installer or an audited release.
 
 ## What it does
 
@@ -59,4 +59,4 @@ This standalone repository contains the manager, router, GUI, tests and example 
 
 Experimental, manually deployed software, not a production-ready package. Start with the isolated tests or simulated GUI. Hardware budgets must be calibrated before real use. There is no current handoff video in this repository; the simulated GUI is not physical-GPU benchmark evidence.
 
-Bug reports and non-sensitive test results are welcome via [GitHub Issues](https://github.com/driftverse/penny-gpu-manager/issues). Include your Node/Ollama versions, GPU, reproduction steps and sanitized errors. Never include tokens, private prompts, state files or personal media.
+Bug reports and non-sensitive test results are welcome via [GitHub Issues](https://github.com/driftverse/hermes-gpu-manager/issues). Include your Node/Ollama versions, GPU, reproduction steps and sanitized errors. Never include tokens, private prompts, state files or personal media.

@@ -3,14 +3,14 @@
 # exists: the audience tag is specific to THIS app. Until all three are set the public host answers 503;
 # local access on 127.0.0.1:3017 keeps working.
 [Unit]
-Description=Penny GPU priority manager, Ollama router and GUI (loopback only)
-After=network.target penny-ollama-gpu.service penny-ollama-cpu.service
-Wants=penny-ollama-gpu.service penny-ollama-cpu.service
+Description=Hermes GPU priority manager, Ollama router and GUI (loopback only)
+After=network.target hermes-ollama-gpu.service hermes-ollama-cpu.service
+Wants=hermes-ollama-gpu.service hermes-ollama-cpu.service
 
 [Service]
 Type=simple
-WorkingDirectory=/home/example/Apps/penny-gpu-manager
-ExecStart=/usr/bin/node /home/example/Apps/penny-gpu-manager/src/main.mjs
+WorkingDirectory=/home/example/Apps/hermes-gpu-manager
+ExecStart=/usr/bin/node /home/example/Apps/hermes-gpu-manager/src/main.mjs
 Environment=NODE_ENV=production
 Environment=GPU_PUBLIC_HOST=gpu.example.com
 Environment=GPU_ACCESS_ISSUER=https://your-team.cloudflareaccess.com
@@ -24,7 +24,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=read-only
-ReadWritePaths=/home/example/.config/penny-gpu
+ReadWritePaths=/home/example/.config/hermes-gpu
 UMask=0077
 
 [Install]

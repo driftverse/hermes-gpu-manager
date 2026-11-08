@@ -11,7 +11,7 @@ import { goodConfig } from './helpers/jwt-fixture.mjs';
 
 async function boot(worldOpts) {
   const world = await createWorld(worldOpts).start();
-  const stateDir = await mkdtemp(join(tmpdir(), 'penny-app-'));
+  const stateDir = await mkdtemp(join(tmpdir(), 'hermes-app-'));
   const config = { ...goodConfig(), stateDir, routerPort: 0, localPort: 0, gpuBackend: world.servers.gpu.url, cpuBackend: world.servers.cpu.url, reconcileMs: 60_000 };
   const app = await startApp({ config, runner: world.runner, publicDir: join(import.meta.dirname, '..', 'public'), logger: { error() {}, info() {} } });
   const api = (path, o = {}) => request(app.managerPort, { path, headers: { host: `127.0.0.1:${app.managerPort}`, ...(o.headers || {}) }, ...o });

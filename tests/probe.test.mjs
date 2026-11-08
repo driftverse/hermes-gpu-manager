@@ -72,18 +72,18 @@ test('probe: a failing apps query still returns memory', async () => {
 test('safe runner: only the fixed nvidia-smi invocations and systemctl --user is-active <known unit>', async () => {
   const executed = [];
   const execFile = (file, args, opts, cb) => { executed.push([file, args]); cb(null, 'ok\n', ''); };
-  const run = createSafeRunner({ execFile, allowedUnits: ['penny-ollama-gpu.service'] });
+  const run = createSafeRunner({ execFile, allowedUnits: ['hermes-ollama-gpu.service'] });
   assert.equal((await run('nvidia-smi', MEMORY_ARGS)).stdout, 'ok\n');
   await run('nvidia-smi', APPS_ARGS);
-  await run('systemctl', ['--user', 'is-active', 'penny-ollama-gpu.service']);
+  await run('systemctl', ['--user', 'is-active', 'hermes-ollama-gpu.service']);
   assert.equal(executed.length, 3);
   const denied = [
     ['nvidia-smi', ['-q']],
     ['nvidia-smi', [...MEMORY_ARGS, '--id=0']],
-    ['systemctl', ['--user', 'restart', 'penny-ollama-gpu.service']],
+    ['systemctl', ['--user', 'restart', 'hermes-ollama-gpu.service']],
     ['systemctl', ['--user', 'is-active', 'sshd.service']],
-    ['systemctl', ['is-active', 'penny-ollama-gpu.service']],
-    ['systemctl', ['--user', 'is-active', 'penny-ollama-gpu.service', '--now']],
+    ['systemctl', ['is-active', 'hermes-ollama-gpu.service']],
+    ['systemctl', ['--user', 'is-active', 'hermes-ollama-gpu.service', '--now']],
     ['rm', ['-rf', '/']],
     ['ollama', ['ps']],
     ['bash', ['-c', 'true']],
