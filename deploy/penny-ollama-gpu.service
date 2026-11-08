@@ -12,6 +12,9 @@ Environment=OLLAMA_MODELS=/home/example/.ollama/models
 # llama.cpp keeps this much VRAM (MiB) free when fitting a model; the default 1024 stopped LFM3 at a 100k window
 # (needs ~2.36 GiB) from loading fully on this 4 GB card. 512 still leaves a margin for the desktop.
 Environment=LLAMA_ARG_FIT_TARGET=512
+# Explicit CUDA12 backend for Pascal support in the bundled llama-server.
+Environment=LD_LIBRARY_PATH=/home/example/.local/ollama/lib/ollama:/home/example/.local/ollama/lib/ollama/cuda_v12
+Environment=GGML_BACKEND_PATH=/home/example/.local/ollama/lib/ollama/cuda_v12/libggml-cuda.so
 Restart=on-failure
 RestartSec=5
 
