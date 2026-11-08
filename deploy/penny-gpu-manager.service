@@ -1,0 +1,31 @@
+# Router (11434, what Hindsight and everything else already call) + manager + GUI (3017, gpu.example.com).
+# Copy the Cloudflare Access values from open-higgsfield.service pattern once the gpu.example.com Access app
+# exists: the audience tag is specific to THIS app. Until all three are set the public host answers 503;
+# local access on 127.0.0.1:3017 keeps working.
+[Unit]
+Description=Penny GPU priority manager, Ollama router and GUI (loopback only)
+After=network.target penny-ollama-gpu.service penny-ollama-cpu.service
+Wants=penny-ollama-gpu.service penny-ollama-cpu.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/example/Apps/penny-gpu-manager
+ExecStart=/usr/bin/node /home/example/Apps/penny-gpu-manager/src/main.mjs
+Environment=NODE_ENV=production
+Environment=GPU_PUBLIC_HOST=gpu.example.com
+Environment=GPU_ACCESS_ISSUER=https://your-team.cloudflareaccess.com
+Environment=GPU_ACCESS_AUD=REPLACE_WITH_GPU_ACCESS_APP_AUDIENCE_TAG
+Environment=GPU_OWNER_EMAIL=owner@example.com
+Restart=on-failure
+RestartSec=5
+# A stop must not cut a running model request: the manager only waits, so give streams time to end.
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/example/.config/penny-gpu
+UMask=0077
+
+[Install]
+WantedBy=default.target

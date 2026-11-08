@@ -1,0 +1,21 @@
+# The CPU Ollama instance: always on, never touches the GPU. It is the fallback for every model, so callers
+# are never refused. Measured on this machine: LFM3 1.7B loads in ~2 s and answers at ~19 tok/s.
+# BOTH variables are needed: CUDA_VISIBLE_DEVICES=-1 alone still lets Ollama find the card through Vulkan
+# (it put 270 MiB of the model on the GPU in testing); OLLAMA_VULKAN=0 closes that.
+[Unit]
+Description=Penny Ollama (CPU-only instance, loopback only)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/example/.local/ollama/bin/ollama serve
+Environment=OLLAMA_HOST=127.0.0.1:11435
+Environment=OLLAMA_MODELS=/home/example/.ollama/models
+Environment=CUDA_VISIBLE_DEVICES=-1
+Environment=OLLAMA_VULKAN=0
+Environment=OLLAMA_KEEP_ALIVE=-1
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

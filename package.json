@@ -1,0 +1,14 @@
+{
+  "name": "penny-gpu-manager",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "repository": "github:driftverse/penny-gpu-manager",
+  "description": "GPU priority manager and Ollama router for Penny (zero dependencies).",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test --test-timeout=60000 tests/",
+    "start": "node src/main.mjs"
+  }
+}

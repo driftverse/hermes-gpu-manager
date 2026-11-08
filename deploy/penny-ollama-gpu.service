@@ -1,0 +1,19 @@
+# The GPU Ollama instance. Same binary, models and settings as the old penny-ollama.service, moved to port 11436.
+# The manager decides which models live here; nothing should talk to this port directly except the manager and router.
+[Unit]
+Description=Penny Ollama (GPU instance, loopback only)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/example/.local/ollama/bin/ollama serve
+Environment=OLLAMA_HOST=127.0.0.1:11436
+Environment=OLLAMA_MODELS=/home/example/.ollama/models
+# llama.cpp keeps this much VRAM (MiB) free when fitting a model; the default 1024 stopped LFM3 at a 100k window
+# (needs ~2.36 GiB) from loading fully on this 4 GB card. 512 still leaves a margin for the desktop.
+Environment=LLAMA_ARG_FIT_TARGET=512
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

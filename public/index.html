@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>GPU priority</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-text">
+      <h1>GPU priority</h1>
+      <p id="summary" class="summary">Loading…</p>
+    </div>
+    <p id="live" class="live" role="status" aria-live="polite">Connecting…</p>
+  </header>
+
+  <div id="banners" class="banners" aria-live="polite"></div>
+
+  <main>
+    <section aria-labelledby="vram-h">
+      <h2 id="vram-h">GPU memory</h2>
+      <div id="vram-bar" class="bar" role="img" aria-label="GPU memory use"></div>
+      <ul id="vram-legend" class="legend"></ul>
+    </section>
+
+    <section aria-labelledby="prio-h">
+      <h2 id="prio-h">Priority</h2>
+      <p class="hint">Highest first. Each model takes the GPU memory it needs; the next gets what is left, and anything with nothing left runs on the CPU. Models stay online either way.</p>
+      <ol id="rows" class="rows"></ol>
+    </section>
+
+    <section aria-labelledby="ev-h">
+      <h2 id="ev-h">What is happening</h2>
+      <ol id="events" class="events" aria-live="off"></ol>
+    </section>
+
+    <section aria-labelledby="set-h">
+      <h2 id="set-h">Settings</h2>
+      <form id="settings" class="form" novalidate>
+        <label>Reserved for the desktop and safety (MiB)
+          <input name="reservedMiB" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>GPU total override (MiB, blank = detect)
+          <input name="gpuTotalMiB" inputmode="numeric" autocomplete="off" placeholder="auto">
+        </label>
+        <label>Wait for running requests before moving a model (seconds)
+          <input name="drainTimeoutSec" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>Minimum time between moves (seconds)
+          <input name="minDwellSec" inputmode="numeric" autocomplete="off">
+        </label>
+        <div class="actions">
+          <button type="submit">Save settings</button>
+          <p id="settings-msg" class="msg" role="status"></p>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="add-h">
+      <h2 id="add-h">Add a model</h2>
+      <form id="add" class="form" novalidate>
+        <label>Ollama model
+          <select name="tag" id="add-tag"></select>
+        </label>
+        <label>Display name (optional)
+          <input name="name" autocomplete="off">
+        </label>
+        <label>Layers (needed to split between GPU and CPU)
+          <input name="layers" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>Full GPU need (MiB)
+          <input name="fullGpuMiB" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>Smallest useful GPU share (MiB)
+          <input name="minUsefulGpuMiB" inputmode="numeric" autocomplete="off" value="0">
+        </label>
+        <label class="check"><input type="checkbox" name="allowPartial"> Allow splitting between GPU and CPU</label>
+        <div class="actions">
+          <button type="submit">Add model</button>
+          <p id="add-msg" class="msg" role="status"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
